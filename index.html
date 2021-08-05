@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
     <link rel="stylesheet" href="/css/zoom.css" media="all">
     <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zx1413/cdn@1.2/tocker/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zx1413/cdn@1.2/tocker/css/htmleaf-demo.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zx1413/cdn@1.2/tocker/dist/botui.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zx1413/cdn@1.2/tocker/dist/botui-theme-default.css" />
     <!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
     " type="text/css" media="all"> -->
     <script>
@@ -422,6 +426,17 @@
 
                     <!-- 首页默认取最最新文章集 -->
 
+                    <div class="htmleaf-container">
+                        <div class="htmleaf-content">
+                            <div class="botui-app-container" id="home-demo">
+                                <bot-ui></bot-ui>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
                 </main>
                 <!-- 首页默认取最最新文章集 -->
                 <!--  -->
@@ -820,6 +835,98 @@
         mutex="true"
 
 </meting-js>
+<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.3.4/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/zx1413/cdn@1.2/tocker/dist/botui.min.js"></script>
+<script type="text/javascript">
+    var homeBot = BotUI('home-demo');
+
+    homeBot.message.add({
+        content: '欢迎到我的博客'
+    }).then(function () {
+        return homeBot.message.add({
+            delay: 1500,
+            content: '想逛逛吗'
+        });
+    }).then(function () {
+        return homeBot.action.button({
+            delay: 1000,
+            action: [{
+                text: '好的!',
+                value: 'sure'
+            }, {
+                text: '不用了😒',
+                value: 'skip'
+            }]
+        });
+    }).then(function (res) {
+        if(res.value == 'sure') {
+            tutorial();
+        }
+        if(res.value == 'skip') {
+            end();
+        }
+    });
+
+    var tutorial = function () {
+        homeBot.message.add({
+            delay: 1000,
+            content: "不好意思本博客暂时停止更新"
+        }).then(function () {
+            return homeBot.message.add({
+                delay: 1000,
+                content: '你可以听听歌或逛逛我其他网址'
+            });
+        }).then(function () {
+            return homeBot.message.add({
+                delay: 1200,
+                content: '认为我主页如何（填写后按回车键）'
+            });
+        }).then(function () {
+            return homeBot.action.text({
+                delay: 800,
+                action: {
+                    value: '还行吧',
+                    placeholder: '呵呵'
+                }
+            });
+        }).then(function (res) {
+            return homeBot.message.bot({
+                delay: 500,
+                content: res.value + ' 谢谢夸奖'
+            });
+        }).then(function (res) {
+            return homeBot.message.bot({
+                delay: 1400,
+                content: '不好意思'
+            });
+        }).then(function (res) {
+            return homeBot.message.add({
+                delay: 1200,
+                type: 'embed',
+                content: 'https://cdn.jsdelivr.net/gh/zx1413/cdn@1.2/loading.gif'
+            });
+        }).then(function (res) {
+            return homeBot.message.bot({
+                delay: 2500,
+                content: '好了'
+            });
+        }).then(function (res) {
+            return homeBot.message.bot({
+                delay: 1000,
+                content: '拜拜'
+            });
+        }).then(end);
+    };
+
+    var end = function () {
+        homeBot.message.add({
+            delay: 1000,
+            content: '谢谢光临'
+        });
+    };
+
+
+</script>
 <script>
     $(function(){
         $('body').on('click', '.aplayer', function(){
