@@ -873,7 +873,7 @@
         }).then(function () {
             return homeBot.message.add({
                 delay: 1000,
-                content: '你可以听听歌或逛逛我其他网址'
+                content: '您可以听听本站歌曲'
             });
         }).then(function () {
             return homeBot.message.add({
@@ -907,12 +907,12 @@
         }).then(function (res) {
             return homeBot.message.bot({
                 delay: 2500,
-                content: '好了'
+                content: '不好意思'
             });
         }).then(function (res) {
             return homeBot.message.bot({
                 delay: 1000,
-                content: '拜拜'
+                content: '愉快的时间总是短暂的'
             });
         }).then(end);
     };
@@ -920,7 +920,7 @@
     var end = function () {
         homeBot.message.add({
             delay: 1000,
-            content: '谢谢光临'
+            content: '谢谢您的到访'
         });
     };
 
